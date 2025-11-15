@@ -1,0 +1,53 @@
+# --------------------
+# Python
+# --------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.pdm
+*.pkl
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+env/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# Logs
+*.log
+
+# IDE settings
+.idea/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Arcade cache
+*.swp
+*.bak
+
+# PyCharm specific
+*.ipr
+*.iws
+
+# Pyglet caches
+*.shadercache
+*.glcache
+
+# Tiled map backup files
+*.tmx~
+
+# Media generated in-game
+assets/temp/
