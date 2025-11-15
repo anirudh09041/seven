@@ -214,7 +214,6 @@ class Game(arcade.Window):
             if self.player.hp <= 0:
                 self.player.hp = 0
                 self.game_over = True
-
                 if self.music_player:
                     self.music_player.pause()
 
