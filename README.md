@@ -71,6 +71,7 @@ pip freeze > requirements.txt
 4️⃣ Run the game
 python seven/main.py
 
+```
 📁 Project Structure
 Seven/
 │
@@ -95,7 +96,7 @@ Seven/
 │
 ├── .gitignore
 └── README.md
-
+```
 🧭 Roadmap
 🎯 Current Todo List
 
