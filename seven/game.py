@@ -2,6 +2,8 @@ from seven.settings import *
 from seven.entities.player import Player
 from seven.entities.enemy import Enemy
 from seven.entities.bullet import Bullet
+from seven.entities.explosion import Explosion
+
 import random
 import os
 import arcade
@@ -29,6 +31,10 @@ class Game(arcade.Window):
         self.player = Player(400, 50)
         self.bullet_list = arcade.SpriteList()
         self.enemy_list = arcade.SpriteList()
+
+        self.explosions = []
+
+
         # Load background textures
         self.backgrounds = [
             arcade.load_texture("assets/images/backgrounds/bg_0.png"),
@@ -45,6 +51,7 @@ class Game(arcade.Window):
 
         self.background_music = arcade.load_sound("assets/sounds/music.mp3")
         self.music_player = arcade.play_sound(self.background_music, looping=True)
+
 
 
 
@@ -101,7 +108,8 @@ class Game(arcade.Window):
         self.player.draw()
         self.bullet_list.draw()
         self.enemy_list.draw()
-
+        for explosion in self.explosions:
+            explosion.draw()
 
         #------Game Over -----
         if self.game_over:
@@ -166,7 +174,12 @@ class Game(arcade.Window):
         self.bullet_list.update()
         self.enemy_list.update()
 
+        # Update explosions
+        for explosion in self.explosions:
+            explosion.update()
 
+        # Remove finished explosions
+        self.explosions = [e for e in self.explosions if not e.can_reap()]
 
         # Spawn enemies
         if random.random() < 0.009:
@@ -176,6 +189,9 @@ class Game(arcade.Window):
         for bullet in self.bullet_list:
             hit_list = arcade.check_for_collision_with_list(bullet, self.enemy_list)
             for enemy in hit_list:
+                # Explosion effect
+                explosion = Explosion(enemy.center_x, enemy.center_y)
+                self.explosions.append(explosion)
                 enemy.kill()
                 bullet.kill()
                 self.score += 10
